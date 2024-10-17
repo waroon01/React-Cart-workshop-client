@@ -1,8 +1,10 @@
+import FormProduct from "../../components/admin/FormProduct"
+
 
 const Product = () => {
   return (
     <div>
-      Product
+      <FormProduct />
     </div>
   )
 }
