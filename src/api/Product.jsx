@@ -17,3 +17,16 @@ export const listProduct = (token, count = 20)=>{
         }
     })
 }
+
+
+export const uploadFiles = (token, form)=>{
+    console.log(form)
+
+    return axios.post('http://localhost:5001/api/images',{
+        image: form
+    },{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

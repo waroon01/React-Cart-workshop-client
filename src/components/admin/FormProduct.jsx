@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useEcomStore from "../../Store/ecom-store";
 import { createProduct } from "../../api/Product";
 import { toast } from "react-toastify";
+import UploadFile from "./UploadFile";
 
 const initialState = {
   title: "mouse",
@@ -25,10 +26,10 @@ const FormProduct = () => {
     getProduct(token, 20);
   }, []);
 
-  console.log("dd", products);
+  // console.log("dd", products);
 
   const handleOnChange = (e) => {
-    console.log(e.target.name, e.target.value);
+    // console.log(e.target.name, e.target.value);
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -39,8 +40,9 @@ const FormProduct = () => {
     e.preventDefault();
     try {
       const res = await createProduct(token, form);
-      console.log("datashow ", res);
+      // console.log("datashow ", res);
       toast.success(`Add Product ${res.data.title} Success`);
+      // getProduct(token, 20)
     } catch (err) {
       console.log(err);
     }
@@ -100,6 +102,11 @@ const FormProduct = () => {
             </option>
           ))}
         </select>
+          <hr />
+          {/* upload File */}
+
+          <UploadFile form={form} setForm={setForm} />
+
 
         <button className="bg-blue-500 mx-4 px-5 shadow-md py-3 text-white">
           Add Product
@@ -125,7 +132,7 @@ const FormProduct = () => {
 
           {
             products.map((item, index)=>{
-                console.log(item)
+                // console.log(item)
                 return (
                     <tr key={index}>
                     <th scope="row">{index+1}</th>
