@@ -20,7 +20,7 @@ export const listProduct = (token, count = 20)=>{
 
 
 export const uploadFiles = (token, form)=>{
-    console.log(form)
+    // console.log(form)
 
     return axios.post('http://localhost:5001/api/images',{
         image: form
@@ -30,3 +30,16 @@ export const uploadFiles = (token, form)=>{
         }
     })
 }
+
+
+export const removeFiles = (token, public_id)=>{
+
+    return axios.post('http://localhost:5001/api/removeimages',{
+        public_id
+    },{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+

@@ -23,7 +23,7 @@ const FormProduct = () => {
 
   useEffect(() => {
     getCatagory(token);
-    getProduct(token, 20);
+    getProduct(token, 100);
   }, []);
 
   // console.log("dd", products);
