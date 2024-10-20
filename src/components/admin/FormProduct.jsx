@@ -3,6 +3,7 @@ import useEcomStore from "../../Store/ecom-store";
 import { createProduct } from "../../api/Product";
 import { toast } from "react-toastify";
 import UploadFile from "./UploadFile";
+import { Link } from "react-router-dom";
 
 const initialState = {
   title: "mouse",
@@ -119,6 +120,7 @@ const FormProduct = () => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"> 
           <tr>
             <th scope="col">#</th>
+            <th scope="col">ภาพ</th>
             <th scope="col">ชื่อสินค้า</th>
             <th scope="col">รายละเอียด</th>
             <th scope="col">ราคา</th>
@@ -136,6 +138,19 @@ const FormProduct = () => {
                 return (
                     <tr key={index}>
                     <th scope="row">{index+1}</th>
+                    <td>
+                      {
+                        item.images.length > 0
+                        ?<img 
+                          className="w-24 h-24 rounded-lg shadow-md"
+                          src={item.images[0].url} 
+                        />
+                        :<div 
+                          className="w-24 h-24 bg-slate-300 rounded-md flex items-center justify-center shadow-sm">
+                            No image
+                        </div>
+                      }
+                    </td>
                     <td>{item.title}</td>
                     <td>{item.description}</td>
                     <td>{item.price}</td>
@@ -143,7 +158,11 @@ const FormProduct = () => {
                     <td>{item.sold}</td>
                     <td>{item.updatedAt}</td>
                     <td>
-                        <p>แก้ไข</p>
+                        <p className="bg-yellow-500 rounded-md p-1 shadow-md">
+                          <Link to={'/admin/product/' + item.id}>
+                            แก้ไข
+                          </Link>
+                        </p>
                         <p>ลบ</p>
                     </td>
                   </tr>

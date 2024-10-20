@@ -18,6 +18,25 @@ export const listProduct = (token, count = 20)=>{
     })
 }
 
+export const readProduct = (token, id)=>{
+
+    return axios.get('http://localhost:5001/api/product/'+id,{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+
+export const updateProduct = (token, id, form)=>{
+
+    return axios.put('http://localhost:5001/api/product/'+id, form,{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
 
 export const uploadFiles = (token, form)=>{
     // console.log(form)
