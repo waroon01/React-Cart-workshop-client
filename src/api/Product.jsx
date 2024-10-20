@@ -27,6 +27,15 @@ export const readProduct = (token, id)=>{
     })
 }
 
+export const deleteProduct = (token, id)=>{
+
+    return axios.delete('http://localhost:5001/api/product/'+id,{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
 
 export const updateProduct = (token, id, form)=>{
 

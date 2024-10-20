@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import useEcomStore from "../../Store/ecom-store";
-import { createProduct } from "../../api/Product";
+import { createProduct, deleteProduct } from "../../api/Product";
 import { toast } from "react-toastify";
 import UploadFile from "./UploadFile";
 import { Link } from "react-router-dom";
 
 const initialState = {
-  title: "mouse",
-  description: "mouse Asus",
-  price: 350,
-  quantity: 250,
+  title: "",
+  description: "",
+  price: 0,
+  quantity: 0,
   categoryId: "",
   images: [],
 };
@@ -42,12 +42,28 @@ const FormProduct = () => {
     try {
       const res = await createProduct(token, form);
       // console.log("datashow ", res);
+      setForm(initialState)
       toast.success(`Add Product ${res.data.title} Success`);
-      // getProduct(token, 20)
+      getProduct(token, 100)
     } catch (err) {
       console.log(err);
     }
   };
+
+  const handleDelete = async(id)=>{
+    if(window.confirm('ต้องการลบสินค้าใช่หรือไม่')){
+      try{
+        const res = await deleteProduct(token, id)
+        console.log(res)
+        toast.success('ลบสินค้าเรียบร้อยแล้ว')
+        getProduct(token,100)
+      }catch(err){
+        console.log(err)
+      }
+    }
+  }
+
+
 
   return (
     <div className="container mx-auto p-4 bg-white shadow-md">
@@ -157,13 +173,19 @@ const FormProduct = () => {
                     <td>{item.quantity}</td>
                     <td>{item.sold}</td>
                     <td>{item.updatedAt}</td>
-                    <td>
+                    <td className="flex gap-2">
                         <p className="bg-yellow-500 rounded-md p-1 shadow-md">
                           <Link to={'/admin/product/' + item.id}>
                             แก้ไข
                           </Link>
                         </p>
-                        <p>ลบ</p>
+
+
+                        <p 
+                        className="bg-red-500 rounded-md p-1 shadow-md text-white"
+                        onClick={()=>handleDelete(item.id)}>
+                          ลบ
+                        </p>
                     </td>
                   </tr>
                 )
