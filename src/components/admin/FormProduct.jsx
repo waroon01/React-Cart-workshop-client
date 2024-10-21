@@ -4,6 +4,7 @@ import { createProduct, deleteProduct } from "../../api/Product";
 import { toast } from "react-toastify";
 import UploadFile from "./UploadFile";
 import { Link } from "react-router-dom";
+import { Pencil, Trash2  } from 'lucide-react';
 
 const initialState = {
   title: "",
@@ -20,11 +21,18 @@ const FormProduct = () => {
   const { token, getCatagory, categories, getProduct, products } = useEcomStore(
     (state) => state
   );
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    price: 0,
+    quantity: 0,
+    categoryId: "",
+    images: [],
+  });
 
   useEffect(() => {
-    getCatagory(token);
-    getProduct(token, 100);
+    getCatagory();
+    getProduct(100);
   }, []);
 
   // console.log("dd", products);
@@ -44,7 +52,7 @@ const FormProduct = () => {
       // console.log("datashow ", res);
       setForm(initialState)
       toast.success(`Add Product ${res.data.title} Success`);
-      getProduct(token, 100)
+      getProduct(100)
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +64,7 @@ const FormProduct = () => {
         const res = await deleteProduct(token, id)
         console.log(res)
         toast.success('ลบสินค้าเรียบร้อยแล้ว')
-        getProduct(token,100)
+        getProduct(100)
       }catch(err){
         console.log(err)
       }
@@ -125,16 +133,16 @@ const FormProduct = () => {
           <UploadFile form={form} setForm={setForm} />
 
 
-        <button className="bg-blue-500 mx-4 px-5 shadow-md py-3 text-white">
+        <button className="bg-blue-500 mx-4 px-5 shadow-md py-3 text-white rounded-md hover:scale-105 hover:-translate-y-1 hover:duration-150">
           Add Product
         </button>
 
         <hr />
         <br />
 
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table className="w-full border text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"> 
-          <tr>
+          <tr className="bg-gray-300 border">
             <th scope="col">#</th>
             <th scope="col">ภาพ</th>
             <th scope="col">ชื่อสินค้า</th>
@@ -174,17 +182,17 @@ const FormProduct = () => {
                     <td>{item.sold}</td>
                     <td>{item.updatedAt}</td>
                     <td className="flex gap-2">
-                        <p className="bg-yellow-500 rounded-md p-1 shadow-md">
+                        <p className="bg-yellow-500 rounded-md p-1 shadow-md hover:scale-105 hover:-translate-y-1 hover:duration-200">
                           <Link to={'/admin/product/' + item.id}>
-                            แก้ไข
+                            <Pencil />
                           </Link>
                         </p>
 
 
                         <p 
-                        className="bg-red-500 rounded-md p-1 shadow-md text-white"
+                        className="bg-red-500 rounded-md p-1 shadow-md text-white hover:scale-105 hover:-translate-y-1 hover:duration-200 cursor-pointer"
                         onClick={()=>handleDelete(item.id)}>
-                          ลบ
+                          <Trash2  />
                         </p>
                     </td>
                   </tr>

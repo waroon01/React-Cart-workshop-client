@@ -9,13 +9,9 @@ export const createCategory = (token, form)=>{
     })
 }
 
-export const listCategory = (token)=>{
+export const listCategory = ()=>{
 
-    return axios.get('http://localhost:5001/api/category',{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
+    return axios.get('http://localhost:5001/api/category')
 }
 
 export const removeCategory = (token, id)=>{

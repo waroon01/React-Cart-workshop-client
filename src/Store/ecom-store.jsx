@@ -2,7 +2,7 @@ import axios from 'axios';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware'; //Local storage
 import { listCategory } from '../api/Category';
-import { listProduct } from '../api/Product';
+import { listProduct, searchFilters } from '../api/Product';
 
 const ecomStore = (set)=> ({
     user: null,
@@ -20,25 +20,35 @@ const ecomStore = (set)=> ({
         return res
 
     },
-    getCatagory : async(token)=>{
+    getCatagory : async()=>{
     
         try{
-            const res = await listCategory(token)
+            const res = await listCategory()
             set({categories: res.data})
         }catch(err){
             console.log(err)
             
         }
     },
-    getProduct : async(token, count)=>{
+    getProduct : async(count)=>{
         try{
-            const res = await listProduct(token, count)
+            const res = await listProduct(count)
             set({products: res.data})
         }catch(err){
             console.log(err)
             
         }
-    }
+    },
+    actionSearchFilters : async(arg)=>{
+    
+        try{
+            const res = await searchFilters(arg)
+            set({products: res.data})
+        }catch(err){
+            console.log(err)
+            
+        }
+    },
 
 })
 

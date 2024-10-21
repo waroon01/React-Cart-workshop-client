@@ -27,7 +27,7 @@ const FormEditProduct = () => {
   const [form, setForm] = useState(initialState);
 
   useEffect(() => {
-    getCatagory(token)
+    getCatagory()
     fetchProduct(token,id,form)
   }, []);
 

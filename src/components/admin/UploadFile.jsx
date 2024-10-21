@@ -3,12 +3,15 @@ import Resizer from "react-image-file-resizer";
 import { toast } from "react-toastify";
 import { removeFiles, uploadFiles } from "../../api/Product";
 import useEcomStore from "../../Store/ecom-store";
+import { Loader } from 'lucide-react';
 
 const UploadFile = ({ form, setForm }) => {
   //รับ props จาก FormProduct component
   const token = useEcomStore((state) => state.token);
   const [isLoading, setIsLoading] = useState(false);
+
   const handleOnChange = (e) => {
+    setIsLoading(true);
     const files = e.target.files;
     // console.log(files)
     if (files) {
@@ -46,10 +49,12 @@ const UploadFile = ({ form, setForm }) => {
                 setForm({
                   ...form,
                 });
+                setIsLoading(false);
                 toast.success("Upload image Success!!!");
               })
               .catch((err) => {
                 console.log(err);
+                setIsLoading(false)
               });
           },
           "base64"
@@ -85,6 +90,10 @@ const UploadFile = ({ form, setForm }) => {
     <div className="my-4">
 
       <div className="flex mx-4 gap-4 my-4">
+        {
+          isLoading && <Loader className="w-16 h-16 animate-spin"/>
+        }
+
         {/* image */}
         {
             form.images.map((item, index)=>
