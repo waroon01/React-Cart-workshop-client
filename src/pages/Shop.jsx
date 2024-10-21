@@ -12,7 +12,7 @@ const Shop = () => {
     getProduct()
   },[])
 
-    console.log(products)
+    // console.log(products)
 
   return (
     <div className="flex">
