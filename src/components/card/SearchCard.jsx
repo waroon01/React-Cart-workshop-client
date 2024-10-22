@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import useEcomStore from "../../Store/ecom-store";
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
 
 const SearchCard = () => {
   const getProduct = useEcomStore((state) => state.getProduct);
@@ -13,6 +16,11 @@ const SearchCard = () => {
 
   const [text, setText] = useState("");
   const [categorySelected, setCategorySelected] = useState("");
+
+  const [price, setprice] = useState([1000,30000])
+  const [ok, setOk] = useState(false)
+  
+
 
   useEffect(() => {
     getCatagory();
@@ -48,7 +56,7 @@ const SearchCard = () => {
     setCategorySelected(inState);
 
 
-    if(inState > 0){
+    if(inState.length > 0){
         actionSearchFilters({category: inState})
     }else{
         getProduct()
@@ -57,6 +65,19 @@ const SearchCard = () => {
   };
 
   // Step 3 Search by Price
+  useEffect(()=>{
+    actionSearchFilters({ price })
+
+  },[ok])
+
+  const handlePrice = (value)=>{
+    console.log(value)
+    setprice(value)
+
+    setTimeout(()=>{
+      setOk(!ok)
+    },3000)
+  }
 
   return (
     <div>
@@ -71,7 +92,7 @@ const SearchCard = () => {
 
       <hr />
       {/* Search by Category */}
-      <div>
+      <div className="mb-4">
         <h1 className="mt-2">หมวดหมู่สินค้า</h1>
         <div className="t">
           {categories.map((item, index) => (
@@ -82,6 +103,29 @@ const SearchCard = () => {
           ))}
         </div>
       </div>
+
+      <hr />
+
+      {/* Search by Price */}
+      <div  className="my-4">
+        <h1 >ค้นหาราคา</h1>
+        <div className="mt-3">
+          <div className="flex justify-between mt-2">
+            <span className="text-red-400">{price[0]}</span>
+            <span className="text-green-600">{price[1]}</span>
+          </div>
+          <Slider 
+            onChange={handlePrice}
+            range
+            min={0} 
+            max={100000}
+            defaultValue={[1000, 30000]}
+            
+          />
+        </div>
+      </div>
+
+
     </div>
   );
 };
