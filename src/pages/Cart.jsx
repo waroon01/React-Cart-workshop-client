@@ -1,8 +1,9 @@
+import ListCart from "../components/card/ListCart"
 
 const Cart = () => {
   return (
     <div>
-      cart
+      <ListCart />
     </div>
   )
 }

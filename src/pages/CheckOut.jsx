@@ -1,8 +1,9 @@
+import SummaryCard from "../components/card/SummaryCard"
 
 const CheckOut = () => {
   return (
     <div>
-      CheckOut
+      <SummaryCard />
     </div>
   )
 }
