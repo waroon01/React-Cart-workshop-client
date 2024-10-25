@@ -17,6 +17,7 @@ import HomeUser from "../pages/user/HomeUser.jsx"
 import ProtectRouteUser from "./ProtectRouteUser.jsx"
 import ProtectRouteAdmin from "./ProtectRouteAdmin.jsx"
 import EditProduct from "../pages/admin/EditProduct.jsx"
+import Payment from "../pages/user/Payment.jsx"
 
 
 
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     element: <Layout /> ,
     children: [
       { index: true, element: <Home /> },
-      { path: 'shop', element: <Shop /> },
+      { path: '/shop', element: <Shop /> },
       { path: 'cart', element: <Cart /> },
       { path: 'history', element: <History /> },
       { path: 'checkout', element: <CheckOut /> },
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
     element: <ProtectRouteUser element={<LayoutUser />} />,
     children: [
       { index: true, element: <HomeUser /> },
+      { path: 'payment', element: <Payment /> },
     ]
   },  
 
