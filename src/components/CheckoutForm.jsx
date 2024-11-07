@@ -7,16 +7,23 @@ import {
 import '../stripe.css'
 import { saveOrder } from "../api/user";
 import useEcomStore from "../Store/ecom-store";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CheckoutForm() {
+  const token = useEcomStore((state)=>state.token)
+  const clearCart = useEcomStore((state)=>state.clearCart)
+  
+  const navigate = useNavigate()
+
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = useEcomStore((state)=>state.token)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,17 +50,30 @@ export default function CheckoutForm() {
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
+
+    console.log('payload ',payload)
     if (payload.error) {
       setMessage(payload.error.message);
-    } else {
-    //   setMessage("An unexpected error occurred.");
-    saveOrder(token, payload)
-    .then((res)=>{
-        console.log(res)
-    })
-    .catch((err)=>{
-        console.log(err)
-    })    
+      toast.error(payload.error.message)
+    } 
+    else if(payload.paymentIntent.status === "succeeded"){
+      console.log('Ready to SaveOrder')
+      saveOrder(token, payload)
+      .then((res)=>{
+          console.log(res)
+          clearCart()
+          toast.success("Thank you You Payment Success!!!")
+          navigate('/user/history')
+      })
+      .catch((err)=>{
+          console.log(err)
+      })    
+
+    }    
+    else {
+      console.log('someting went wrong!!!')
+      toast.warning("You payment Not !!! Success")
+
 
     }
 

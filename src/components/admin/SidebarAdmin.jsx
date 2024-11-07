@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { LayoutDashboard, MonitorCog, Store, PackageSearch, LogOut   } from 'lucide-react';
+import { LayoutDashboard, MonitorCog, Store, PackageSearch, LogOut, ShoppingBasket    } from 'lucide-react';
 
 const SidebarAdmin = () => {
   return (
@@ -52,8 +52,19 @@ const SidebarAdmin = () => {
                     :'text-gray-300 px-4 py-2 hover:bg-gray-700 hover:text-white rounded flex items-center'
                 }
             >
-                <PackageSearch  className="mr-2"/>
+                <ShoppingBasket  className="mr-2"/>
                 Product
+            </NavLink>
+            <NavLink 
+                to={'orders'}
+                className={({isActive})=>
+                isActive
+                    ?'bg-gray-900 rounded-md text-white px-4 py-2 flex items-center'
+                    :'text-gray-300 px-4 py-2 hover:bg-gray-700 hover:text-white rounded flex items-center'
+                }
+            >
+                <PackageSearch  className="mr-2"/>
+                orders
             </NavLink>
 
         </nav>

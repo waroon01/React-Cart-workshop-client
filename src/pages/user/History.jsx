@@ -1,9 +1,10 @@
+import HistoryCard from "../../components/card/HistoryCard";
 
 
 function History() {
     return ( 
     <>
-        History
+        <HistoryCard />
     </> 
     );
 }

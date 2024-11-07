@@ -1,73 +1,79 @@
-import axios from 'axios'
+import axios from "axios";
 
-export const createProduct = (token, form)=>{
+export const createProduct = (token, form) => {
+  return axios.post("http://localhost:5001/api/product", form, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-    return axios.post('http://localhost:5001/api/product',form,{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
+export const listProduct = (count = 20) => {
+  return axios.get("http://localhost:5001/api/products/" + count);
+};
 
-export const listProduct = (count = 20)=>{
+export const readProduct = (token, id) => {
+  return axios.get("http://localhost:5001/api/product/" + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-    return axios.get('http://localhost:5001/api/products/'+count)
-}
+export const deleteProduct = (token, id) => {
+  return axios.delete("http://localhost:5001/api/product/" + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-export const readProduct = (token, id)=>{
+export const updateProduct = (token, id, form) => {
+  return axios.put("http://localhost:5001/api/product/" + id, form, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-    return axios.get('http://localhost:5001/api/product/'+id,{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
+export const uploadFiles = (token, form) => {
+  // console.log(form)
 
-export const deleteProduct = (token, id)=>{
+  return axios.post(
+    "http://localhost:5001/api/images",
+    {
+      image: form,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
-    return axios.delete('http://localhost:5001/api/product/'+id,{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
+export const removeFiles = (token, public_id) => {
+  return axios.post(
+    "http://localhost:5001/api/removeimages",
+    {
+      public_id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
+export const searchFilters = (arg) => {
+  return axios.post("http://localhost:5001/api/search/filters", arg);
+};
 
-export const updateProduct = (token, id, form)=>{
-
-    return axios.put('http://localhost:5001/api/product/'+id, form,{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
-
-
-export const uploadFiles = (token, form)=>{
-    // console.log(form)
-
-    return axios.post('http://localhost:5001/api/images',{
-        image: form
-    },{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
-
-
-export const removeFiles = (token, public_id)=>{
-
-    return axios.post('http://localhost:5001/api/removeimages',{
-        public_id
-    },{
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
-
-export const searchFilters = (arg)=>{
-
-    return axios.post('http://localhost:5001/api/search/filters',arg)
-}
+export const listProductBy = (sort, order, limit) => {
+  return axios.post("http://localhost:5001/api/productby", {
+    sort: sort,
+    order: order,
+    limit,
+  });
+};

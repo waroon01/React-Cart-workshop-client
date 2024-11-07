@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useEcomStore from "../../Store/ecom-store";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { numberFormat } from "../../utils/number";
 
 
 const SearchCard = () => {
@@ -111,8 +112,8 @@ const SearchCard = () => {
         <h1 >ค้นหาราคา</h1>
         <div className="mt-3">
           <div className="flex justify-between mt-2">
-            <span className="text-red-400">{price[0]}</span>
-            <span className="text-green-600">{price[1]}</span>
+            <span className="text-red-400">{numberFormat(price[0]) }</span>
+            <span className="text-green-600">{ numberFormat(price[1]) }</span>
           </div>
           <Slider 
             onChange={handlePrice}

@@ -36,3 +36,13 @@ export const saveOrder = (token, payLoad)=>{
         }
     })
 }
+
+
+export const getOrders = (token)=>{
+
+    return axios.get('http://localhost:5001/api/user/order',{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

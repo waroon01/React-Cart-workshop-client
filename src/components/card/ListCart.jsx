@@ -3,6 +3,7 @@ import useEcomStore from "../../Store/ecom-store";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserCart } from "../../api/user";
 import { toast } from "react-toastify";
+import { numberFormat } from "../../utils/number";
 
 const ListCart = () => {
   const cart = useEcomStore((state) => state.carts); //เนื่องจากหลังบ้าน ใช้ key ว่า cart ไม่มี s 
@@ -65,13 +66,13 @@ const ListCart = () => {
 
                   <div>
                     <p className="font-bold">{item.title}</p>
-                    <p className="text-sm">{item.price} x {item.count}</p>
+                    <p className="text-sm">{numberFormat(item.price)} x {item.count}</p>
                   </div>
                 </div>
 
                 {/* right */}
                 <div>
-                  <div className="font-bold text-blue-500">{item.price * item.count}</div>
+                  <div className="font-bold text-blue-500">{numberFormat(item.price * item.count)}</div>
                 </div>
               </div>
             </div>
@@ -83,7 +84,7 @@ const ListCart = () => {
           <p>ยอดรวม</p>
           <div className="flex justify-between">
             <span className="text-2xl font-bold">รวมสุทธิ</span>
-            <span className="text-2xl">{getTotalPrice()}</span>
+            <span className="text-2xl font-bold">{ numberFormat(getTotalPrice()) }</span>
           </div>
 
         <div className="4">
@@ -91,7 +92,13 @@ const ListCart = () => {
           {
             user
             ? <Link>
-                <button onClick={handleSaveCart} className="bg-red-500 w-full rounded-md mb-4 text-white py-2 shadow-md hover:bg-red-700">สั่งซื้อ</button>
+                <button
+                  disabled = {cart.length < 1}
+                   onClick={handleSaveCart} 
+                   className="bg-red-500 w-full rounded-md mb-4 
+                   text-white py-2 shadow-md 
+                   hover:bg-red-700"
+                >สั่งซื้อ</button>
               </Link>
             : <Link to={'/login'}>
                 <button className="bg-blue-500 w-full rounded-md mb-4 text-white py-2 shadow-md hover:bg-blue-700">Login</button>
