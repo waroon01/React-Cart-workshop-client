@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const currenUser = async(token)=> await axios.post('http://localhost:5001/api/current-user',
+export const currenUser = async(token)=> await axios.post('https://react-cart-workshop-server.vercel.app/api/current-user',
     {},{
         headers: {
             Authorization: `Bearer ${token}`
@@ -9,7 +9,7 @@ export const currenUser = async(token)=> await axios.post('http://localhost:5001
     })
 
 export const currentAdmin = async(token)=>{
-    return await axios.post('http://localhost:5001/api/current-admin',
+    return await axios.post('https://react-cart-workshop-server.vercel.app/api/current-admin',
     {},{
         headers: {
             Authorization: `Bearer ${token}`

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const createProduct = (token, form) => {
-  return axios.post("http://localhost:5001/api/product", form, {
+  return axios.post("https://react-cart-workshop-server.vercel.app/api/product", form, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -9,11 +9,11 @@ export const createProduct = (token, form) => {
 };
 
 export const listProduct = (count = 20) => {
-  return axios.get("http://localhost:5001/api/products/" + count);
+  return axios.get("https://react-cart-workshop-server.vercel.app/api/products/" + count);
 };
 
 export const readProduct = (token, id) => {
-  return axios.get("http://localhost:5001/api/product/" + id, {
+  return axios.get("https://react-cart-workshop-server.vercel.app/api/product/" + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -21,7 +21,7 @@ export const readProduct = (token, id) => {
 };
 
 export const deleteProduct = (token, id) => {
-  return axios.delete("http://localhost:5001/api/product/" + id, {
+  return axios.delete("https://react-cart-workshop-server.vercel.app/api/product/" + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -29,7 +29,7 @@ export const deleteProduct = (token, id) => {
 };
 
 export const updateProduct = (token, id, form) => {
-  return axios.put("http://localhost:5001/api/product/" + id, form, {
+  return axios.put("https://react-cart-workshop-server.vercel.app/api/product/" + id, form, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -40,7 +40,7 @@ export const uploadFiles = (token, form) => {
   // console.log(form)
 
   return axios.post(
-    "http://localhost:5001/api/images",
+    "https://react-cart-workshop-server.vercel.app/api/images",
     {
       image: form,
     },
@@ -54,7 +54,7 @@ export const uploadFiles = (token, form) => {
 
 export const removeFiles = (token, public_id) => {
   return axios.post(
-    "http://localhost:5001/api/removeimages",
+    "https://react-cart-workshop-server.vercel.app/api/removeimages",
     {
       public_id,
     },
@@ -67,11 +67,11 @@ export const removeFiles = (token, public_id) => {
 };
 
 export const searchFilters = (arg) => {
-  return axios.post("http://localhost:5001/api/search/filters", arg);
+  return axios.post("https://react-cart-workshop-server.vercel.app/api/search/filters", arg);
 };
 
 export const listProductBy = (sort, order, limit) => {
-  return axios.post("http://localhost:5001/api/productby", {
+  return axios.post("https://react-cart-workshop-server.vercel.app/api/productby", {
     sort: sort,
     order: order,
     limit,

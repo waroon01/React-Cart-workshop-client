@@ -52,7 +52,7 @@ const ecomStore = (set, get) => ({
     },0)
   },
   actionLogin: async (form) => {
-    const res = await axios.post("http://localhost:5001/api/login", form);
+    const res = await axios.post("https://react-cart-workshop-server.vercel.app/api/login", form);
     // console.log(res.data.token)
     set({
       user: res.data.payload,

@@ -80,7 +80,7 @@ const MainNav = () => {
               {
                 // หาค่าเท็จถ้าเป็นเท็จก็จะหยุด ถ้าจริงจะทำที่ตัวหลังเครื่องหมาย &&
                 isOpen && (
-                  <div className="absolute top-16 bg-white shadow-sm ">
+                  <div className="absolute top-16 bg-white shadow-sm z-50">
                     <Link
                       to={"/user/history"}
                       className="block px-5 py-2 hover:bg-gray-200"
