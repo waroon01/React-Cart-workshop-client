@@ -1,5 +1,5 @@
 import BestSeller from "../components/home/BestSeller"
-import ContentCarousal from "../components/home/contentCarousal"
+import ContentCarousal from "../components/home/ContentCarousal"
 import NewProduct from "../components/home/NewProduct"
 
 const Home = () => {
